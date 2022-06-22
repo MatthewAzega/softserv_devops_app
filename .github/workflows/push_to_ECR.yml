@@ -35,5 +35,6 @@ jobs:
         ECR_REPOSITORY: maticzek
         IMAGE_TAG: v0.1.0
       run: |
+        cd application
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
