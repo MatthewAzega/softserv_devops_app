@@ -9,7 +9,7 @@ env:
  AWS_REGION: us-east-1
  ECS_SERVICE: test_app
  ECS_CLUSTER: development
- ECS_TASK_DEFINITION: aws/containers_definitions.json 
+ ECS_TASK_DEFINITION: containers_definitions.json 
  CONTAINER_NAME: app
 
 jobs:
