@@ -4,18 +4,25 @@ on:
  
   push:
     branches: [ main ]
+    
+env:
+ AWS_REGION: us-east-1
+ ECS_SERVICE: test_app
+ ECS_CLUSTER: development
+ ECS_TASK_DEFINITION: /containers_definitions.json 
+ CONTAINER_NAME: app
 
 jobs:
   
   build:
     
-    name: Build Image
+    name: Build and Push Image
     runs-on: ubuntu-latest
 
    
     steps:
 
-    - name: Check out code
+    - name: Code validation
       uses: actions/checkout@v3
     
     - name: Configure AWS credentials
@@ -23,18 +30,42 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
+      id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: softserv_app
         IMAGE_TAG: latest
+      
       run: |
         cd application
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      
+    - name: Add new image ID in the ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ env.ECS_TASK_DEFINITION }}
+        container-name: ${{ env.CONTAINER_NAMME }}
+        image: ${{ steps.build-image.outputs.image }}
+    
+    - name: Deploy AWS ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluser: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: true
+    
+    
+    
+      
+        
