@@ -15,7 +15,7 @@
     ]
   }],
   "family": "development",
-  "memory": 1500,
+  "memory": "1500",
   "network_mode": "host",
   "requires_compatibilities": [{"EC2"}]
 }
