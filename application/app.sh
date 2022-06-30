@@ -1,4 +1,4 @@
-curl wttr.in/Wroclaw.png --output /var/www/html/Wroclaw.png
+curl wttr.in/Wroclaw.png?mM --output /var/www/html/Wroclaw.png
 echo "<img src="Wroclaw.png" alt="Wroclaw">" > /var/www/html/index.html
-curl wttr.in/Berlin.png --output /var/www/html/Berlin.png
+curl wttr.in/Berlin.png?mM --output /var/www/html/Berlin.png
 echo "<img src="Berlin.png" alt="Berlin">" >> /var/www/html/index.html
