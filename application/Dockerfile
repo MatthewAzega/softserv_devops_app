@@ -1,13 +1,14 @@
-FROM node:10
-RUN mkdir /application
-WORKDIR /application
-COPY ./package.json /application/package.json
-COPY ./package-lock.json /application/package-lock.json
-COPY . /application/
-
-RUN npm install
-RUN npm install express
-RUN npm install -g nodemon
-
+FROM alpine:latest
+COPY lighttpd.conf /etc/lighttpd/
+RUN mkdir /var/www
+RUN mkdir /var/www/html
+COPY app.sh /var/www/html
+RUN chmod 770 /var/www/html/app.sh
+RUN apk update / && apk upgrade
+RUN apk add lighttpd
+RUN apk add curl
 EXPOSE 8080
-CMD ["nodemon", "app.js"]
+RUN ./var/www/html/app.sh
+RUN echo "*       *       *       *       *       /var/www/html/app.sh" >> /etc/crontabs/root
+RUN crond -b
+CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
