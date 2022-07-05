@@ -1,1 +1,6 @@
 /infrastructure/key_pair.tf
+/infrastructure/useful_commands.sh
+/backup/*
+.terraform.lock.hcl
+.terraform/
+terraform.tfstate

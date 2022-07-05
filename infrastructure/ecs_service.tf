@@ -12,6 +12,11 @@ resource "aws_ecs_service" "default" {
     container_name   = "app"
     container_port   = 8080
   }
+  network_configuration {
+    subnets = [aws_subnet.private-subnet.id, aws_subnet.private-subnet2.id]
+    security_groups = [aws_security_group.ec2.id]
+  }
+
   name            = "test_app"
   task_definition = "${aws_ecs_task_definition.default.family}:${data.aws_ecs_task_definition.default.revision}"
 }

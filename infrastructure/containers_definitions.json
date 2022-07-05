@@ -1,12 +1,6 @@
 [{
     "cpu": 2,
-  
-    "environment": [
-      { "name": "MESSAGE", "value": "Hello World!" }
-    ],
-
-    
-    "image": "405833359550.dkr.ecr.us-east-1.amazonaws.com/softserv_app:latest",
+    "image": null,
     "name": "app",
   
     "portMappings": [
