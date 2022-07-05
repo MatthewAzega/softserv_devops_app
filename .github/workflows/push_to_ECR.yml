@@ -46,8 +46,10 @@ jobs:
       run: |
         cd application
         CURRENT_D=$(date +%Y%m%d_%H%M%S)
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$CURRENT_D .
-        docker push -a $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$CURRENT_D
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$CURRENT_D 
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$CURRENT_D
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       
     - name: Add new image ID in the ECS task definition
