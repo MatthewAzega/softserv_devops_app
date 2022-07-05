@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "default" {
   container_definitions    = jsonencode([
     {
-    cpu = 2,
+    cpu = 256,
     image = "softserv_app",
     name = "app",
     memory = 50
@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "default" {
     }
   ])
   family                   = "development"
-  memory                   = 1500
+  #memory                   = 1500
   network_mode             = "host"
   requires_compatibilities = ["EC2"]
 }
