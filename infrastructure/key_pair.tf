@@ -1,0 +1,8 @@
+resource "aws_key_pair" "default" {
+  key_name   = "aws_kp"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDdwbJYAYSKK3sEt70pSGRat8BN+AdQP9qE8fwfsJXwUVnBzg2qnNpB3nVijMb0h8i1GWUNKPbkBpsswZzy30s+00KclgfQ0i0W2qYB6uW3DTlFL+mwo5nCYYNCmoVoi3EvrDaxnCkrZ4j0zdeR599cngKB3QAMpYpRQTMIbfkohqHbWRCUybcdaqnmAv5l4fqnaB9Ghd6+1pRq0hk69Pt+XxRjMiTRGPNmqeIVpFuJzAyTJyaA2/er6Q1W35P4xBOPBSA30ywgylSduBsowJ86RYDhBVPYwZHVe44KzZ+tK8Wz+btsmaG5iggWB0jg52WFwoaJf/TpXh5jHLKAv7Z1OETIF1LYXoXILfzIO0iMoeBRxFVSLshyzoaXd820t3gvfTJI+mFjvyJLrOL3yfLSbdfzcwp8y+Q4xs3hIqSrU4kftL6oVFjvx0L1PUniz6280i1vX+4quukF5aV9T84IRblJT3XlDcAaLSS6FfnW4Lic+sL7JEHQOBUFVgl67/frVV71AdYTRsMrW2W3+SLmAGXRcNy1iyT9rkhLjQRh9OjBMGV2342abknpN+kW0i1lhJfcy1KvFZn/1NxE+wJOY6jFe5fVapdUY6JZR+UTHl94YLg7bmX+/MnYYp4D/CXL5x27UMAba4plcpVIFEBYpdnYHattjg4FXnIO1Xrpaw== matthewazega@gmail.com"
+
+  tags = {
+    "name" = "matthewazega@gmail.com"
+  }
+}
