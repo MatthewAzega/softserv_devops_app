@@ -4,7 +4,8 @@ on:
  
   push:
     branches: [ main ]
-    
+    paths:
+      - application/**
 env:
  AWS_REGION: us-east-1
  ECS_SERVICE: test_app
