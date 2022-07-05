@@ -4,7 +4,7 @@ resource "aws_ecs_task_definition" "default" {
     cpu = 2,
     image = "softserv_app",
     name = "app",
-    memory = 256
+    memory = 50
     portMappings = [
       { containerPort = 8080
         protocol = "tcp" }
