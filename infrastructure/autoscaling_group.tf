@@ -19,5 +19,5 @@ resource "aws_autoscaling_group" "default" {
 
   target_group_arns    = [aws_alb_target_group.alb_ecs_target-g.arn]
   termination_policies = ["OldestInstance"]
-  vpc_zone_identifier  = [aws_subnet.private-subnet.id, aws_subnet.private-subnet2.id]
+  vpc_zone_identifier  = [aws_subnet.public-subnet.id, aws_subnet.public-subnet2.id]
 }
