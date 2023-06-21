@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "default" {
   iam_instance_profile        = aws_iam_instance_profile.ecs.name
   image_id                    = data.aws_ami.default.id
   instance_type               = "t2.micro"
-  key_name                    = "aws_kp"
+
 
   lifecycle {
     create_before_destroy = true
